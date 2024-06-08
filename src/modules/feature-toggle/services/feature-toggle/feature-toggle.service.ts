@@ -8,8 +8,6 @@ export class FeatureToggleService {
   constructor(private readonly cacheService: CacheService) {}
 
   create(createFeatureToggleDto: FeatureToggleDto) {
-    console.log(createFeatureToggleDto);
-
     return this.cacheService.set(
       createFeatureToggleDto.key,
       new FeatureToggle(createFeatureToggleDto),

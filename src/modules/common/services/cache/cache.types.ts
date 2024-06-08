@@ -16,8 +16,8 @@ export type CacheOptions = {
 
 export const ttlValues: Record<TtlType, number> = {
   [TtlType.PERMANENT]: 0,
-  [TtlType.SECONDS]: 1000,
-  [TtlType.MINUTES]: 60000,
+  [TtlType.SECONDS]: 1,
+  [TtlType.MINUTES]: 3600,
   [TtlType.HOURS]: 3600000,
   [TtlType.DAYS]: 86400000,
   [TtlType.WEEKS]: 604800000,

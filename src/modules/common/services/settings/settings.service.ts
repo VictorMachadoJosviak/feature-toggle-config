@@ -6,6 +6,9 @@ const configSchema = z.object({
   REDIS_HOST: z.string({
     required_error: 'env REDIS_HOST is missing check your .env file',
   }),
+  REDIS_PORT: z.number({
+    required_error: 'env REDIS_PORT is missing check your .env file',
+  }),
 });
 
 type ConfigType = z.infer<typeof configSchema>;
@@ -21,6 +24,7 @@ export class SettingsService implements OnModuleInit {
   private getConfig() {
     const config: ConfigType = {
       REDIS_HOST: this.configService.get<string>('REDIS_HOST'),
+      REDIS_PORT: Number(this.configService.get<string>('REDIS_PORT')),
     };
 
     const parsedConfig = configSchema.safeParse(config);

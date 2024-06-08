@@ -31,4 +31,8 @@ export class FeatureToggleDto {
   @IsInt()
   @IsOptional()
   databasePercentage: number = 100;
+
+  @ApiProperty()
+  @IsOptional()
+  active: boolean = true;
 }

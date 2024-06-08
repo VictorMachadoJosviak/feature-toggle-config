@@ -1,11 +1,14 @@
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { Inject, Injectable } from '@nestjs/common';
 import { Cache } from 'cache-manager';
+import { RedisStore } from 'cache-manager-redis-store';
 import { CacheOptions, TtlType, ttlValues } from './cache.types';
 
 @Injectable()
 export class CacheService {
-  constructor(@Inject(CACHE_MANAGER) private cacheManager: Cache) {}
+  constructor(
+    @Inject(CACHE_MANAGER) private cacheManager: Cache & RedisStore,
+  ) {}
 
   async get<T>(key: string) {
     return this.cacheManager.get<T>(key);
@@ -18,7 +21,7 @@ export class CacheService {
 
     const ttl = options.ttl * ttlValue;
 
-    return this.cacheManager.set(key, value, ttl);
+    return this.cacheManager.set(key, value, { ttl }, null);
   }
 
   async del(key: string) {

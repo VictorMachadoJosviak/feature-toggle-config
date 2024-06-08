@@ -11,6 +11,8 @@ export class FeatureToggle {
 
   databasePercentage?: number;
 
+  active: boolean;
+
   constructor(featureToggle: FeatureToggle) {
     this.key = featureToggle.key;
     this.description = featureToggle.description;
@@ -23,5 +25,7 @@ export class FeatureToggle {
       featureToggle.databasePercentage === 0
         ? 100
         : featureToggle.databasePercentage;
+
+    this.active = featureToggle.active;
   }
 }
