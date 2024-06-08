@@ -21,6 +21,10 @@ export class FeatureToggleService {
   async findOne(key: string) {
     const featureToggle = await this.details(key);
 
+    if (!featureToggle.active) {
+      return false;
+    }
+
     const calculateDatabasePercentage = Math.random() * 100;
 
     if (calculateDatabasePercentage > featureToggle.databasePercentage) {

@@ -7,8 +7,9 @@ import {
   Param,
   Post,
 } from '@nestjs/common';
-import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
 
+import { TtlType } from '../../../common/services/cache/cache.types';
 import { FeatureToggleDto } from '../../dto/feature-toggle.dto';
 import { FeatureToggleService } from '../../services/feature-toggle/feature-toggle.service';
 
@@ -18,6 +19,26 @@ export class FeatureToggleController {
   constructor(private readonly featureToggleService: FeatureToggleService) {}
 
   @Post()
+  @ApiResponse({
+    status: HttpStatus.CREATED,
+  })
+  @ApiBody({
+    description: 'Feature toggle details',
+    type: FeatureToggleDto,
+    examples: {
+      example: {
+        description: 'Feature toggle description',
+        value: {
+          key: 'feature-key',
+          description: 'Feature toggle description',
+          ttl: 100,
+          ttlType: `(Enum) ${TtlType.MINUTES}, ${TtlType.HOURS}, ${TtlType.DAYS}, ${TtlType.WEEKS}, ${TtlType.MONTHS}, ${TtlType.YEARS}`,
+          databasePercentage: 100,
+          active: true,
+        },
+      },
+    },
+  })
   create(@Body() createFeatureToggleDto: FeatureToggleDto) {
     return this.featureToggleService.create(createFeatureToggleDto);
   }

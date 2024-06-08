@@ -11,10 +11,6 @@ export class FeatureToggleDto {
   @ApiProperty()
   description: string;
 
-  @IsString()
-  @ApiProperty()
-  hue: string;
-
   @ApiProperty()
   @Min(0)
   ttl: number;
