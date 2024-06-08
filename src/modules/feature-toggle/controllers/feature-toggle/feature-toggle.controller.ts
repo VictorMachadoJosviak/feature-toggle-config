@@ -1,5 +1,13 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpStatus,
+  Param,
+  Post,
+} from '@nestjs/common';
+import { ApiResponse, ApiTags } from '@nestjs/swagger';
 
 import { FeatureToggleDto } from '../../dto/feature-toggle.dto';
 import { FeatureToggleService } from '../../services/feature-toggle/feature-toggle.service';
@@ -15,11 +23,21 @@ export class FeatureToggleController {
   }
 
   @Get(':key')
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'Feature enabled',
+    type: Boolean,
+  })
   findOne(@Param('key') key: string) {
     return this.featureToggleService.findOne(key);
   }
 
   @Get(':key/details')
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'Feature toggle details',
+    type: FeatureToggleDto,
+  })
   details(@Param('key') key: string) {
     return this.featureToggleService.details(key);
   }
