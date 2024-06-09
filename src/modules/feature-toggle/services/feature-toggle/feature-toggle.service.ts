@@ -43,7 +43,7 @@ export class FeatureToggleService {
       throw new NotFoundException(`Key ${key} not found`);
     }
 
-    const ttl = await this.cacheService.getExpiresIn(key);
+    const ttl = await this.cacheService.getTTL(key);
 
     return {
       key: featureToggle.key,

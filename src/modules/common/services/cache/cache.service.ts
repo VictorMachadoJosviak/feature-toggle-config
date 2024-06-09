@@ -28,7 +28,7 @@ export class CacheService {
     return this.cacheManager.del(key);
   }
 
-  getExpiresIn(key: string) {
+  getTTL(key: string) {
     return this.cacheManager.store.ttl(key);
   }
 }
