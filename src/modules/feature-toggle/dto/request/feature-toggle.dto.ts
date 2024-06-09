@@ -1,8 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsEnum, IsInt, IsOptional, IsString, Max, Min } from 'class-validator';
-import { TtlType } from '../../common/services/cache/cache.types';
+import { TtlType } from '../../../common/services/cache/cache.types';
 
-export class FeatureToggleDto {
+export class FeatureToggleResquestDto {
   @IsString()
   @ApiProperty()
   key: string;

@@ -10,7 +10,8 @@ import {
 import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 import { TtlType } from '../../../common/services/cache/cache.types';
-import { FeatureToggleDto } from '../../dto/feature-toggle.dto';
+import { FeatureToggleResquestDto } from '../../dto/request/feature-toggle.dto';
+import { FeatureToggleResponseDto } from '../../dto/response/feature-toggle.dto';
 import { FeatureToggleService } from '../../services/feature-toggle/feature-toggle.service';
 
 @ApiTags('feature-toggle')
@@ -24,7 +25,7 @@ export class FeatureToggleController {
   })
   @ApiBody({
     description: 'Feature toggle details',
-    type: FeatureToggleDto,
+    type: FeatureToggleResquestDto,
     examples: {
       example: {
         description: 'Feature toggle description',
@@ -39,7 +40,7 @@ export class FeatureToggleController {
       },
     },
   })
-  create(@Body() createFeatureToggleDto: FeatureToggleDto) {
+  create(@Body() createFeatureToggleDto: FeatureToggleResquestDto) {
     return this.featureToggleService.create(createFeatureToggleDto);
   }
 
@@ -57,7 +58,7 @@ export class FeatureToggleController {
   @ApiResponse({
     status: HttpStatus.OK,
     description: 'Feature toggle details',
-    type: FeatureToggleDto,
+    type: FeatureToggleResponseDto,
   })
   details(@Param('key') key: string) {
     return this.featureToggleService.details(key);

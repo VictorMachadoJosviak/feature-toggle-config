@@ -10,11 +10,11 @@ export class CacheService {
     @Inject(CACHE_MANAGER) private cacheManager: Cache & RedisStore,
   ) {}
 
-  async get<T>(key: string) {
+  get<T>(key: string) {
     return this.cacheManager.get<T>(key);
   }
 
-  async set<T>(key: string, value: T, options?: CacheOptions) {
+  set<T>(key: string, value: T, options?: CacheOptions) {
     const ttlType = options.ttl === 0 ? TtlType.PERMANENT : options.ttlType;
 
     const ttlValue = ttlValues[ttlType] || ttlValues.PERMANENT;
@@ -24,7 +24,11 @@ export class CacheService {
     return this.cacheManager.set(key, value, { ttl }, null);
   }
 
-  async del(key: string) {
+  del(key: string) {
     return this.cacheManager.del(key);
+  }
+
+  getExpiresIn(key: string) {
+    return this.cacheManager.store.ttl(key);
   }
 }
