@@ -3,6 +3,7 @@ import { CacheService } from '../../../common/services/cache/cache.service';
 import { FeatureToggleResquestDto } from '../../dto/request/feature-toggle.dto';
 import { FeatureToggleResponseDto } from '../../dto/response/feature-toggle.dto';
 import { FeatureToggle } from '../../entities/feature-toggle.entity';
+import { slugify } from '../../helpers/slugify/slugify.helper';
 import { formatTTL } from '../../helpers/ttl/format-ttl.helper';
 
 @Injectable()
@@ -11,7 +12,7 @@ export class FeatureToggleService {
 
   create(createFeatureToggleDto: FeatureToggleResquestDto) {
     return this.cacheService.set(
-      createFeatureToggleDto.key,
+      slugify(createFeatureToggleDto.key),
       new FeatureToggle(createFeatureToggleDto),
       {
         ttl: createFeatureToggleDto.ttl,
