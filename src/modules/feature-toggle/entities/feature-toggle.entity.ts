@@ -16,7 +16,8 @@ export class FeatureToggle {
   constructor(featureToggle: FeatureToggle) {
     this.key = featureToggle.key;
     this.description = featureToggle.description;
-    this.ttl = featureToggle.ttl;
+    this.ttl =
+      featureToggle.ttlType === TtlType.PERMANENT ? 0 : featureToggle.ttl;
 
     this.ttlType =
       featureToggle.ttl === 0 ? TtlType.PERMANENT : featureToggle.ttlType;
